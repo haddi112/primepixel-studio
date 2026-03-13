@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    /* Dark premium theme */
+    --background: 0.12 0.01 265;
+    --foreground: 0.96 0.005 265;
+    --card: 0.16 0.015 265;
+    --card-foreground: 0.96 0.005 265;
+    --popover: 0.16 0.015 265;
+    --popover-foreground: 0.96 0.005 265;
+    /* Primary: electric blue */
+    --primary: 0.56 0.2 265;
+    --primary-foreground: 0.98 0 0;
+    /* Secondary: dark navy */
+    --secondary: 0.2 0.02 265;
+    --secondary-foreground: 0.96 0.005 265;
+    /* Muted */
+    --muted: 0.22 0.015 265;
+    --muted-foreground: 0.65 0.02 265;
+    /* Accent: vibrant green */
+    --accent: 0.72 0.2 145;
+    --accent-foreground: 0.1 0.01 145;
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    /* Borders & inputs */
+    --border: 0.3 0.02 265;
+    --input: 0.25 0.02 265;
+    --ring: 0.56 0.2 265;
+    /* Charts */
+    --chart-1: 0.56 0.2 265;
+    --chart-2: 0.72 0.2 145;
+    --chart-3: 0.65 0.15 200;
+    --chart-4: 0.7 0.18 300;
+    --chart-5: 0.75 0.2 45;
+    /* Sidebar */
+    --sidebar: 0.14 0.012 265;
+    --sidebar-foreground: 0.96 0.005 265;
+    --sidebar-primary: 0.56 0.2 265;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.22 0.02 265;
+    --sidebar-accent-foreground: 0.96 0.005 265;
+    --sidebar-border: 0.25 0.02 265;
+    --sidebar-ring: 0.56 0.2 265;
+    /* Custom brand tokens */
+    --brand-blue: oklch(0.56 0.22 265);
+    --brand-green: oklch(0.72 0.22 145);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-blur: blur(16px);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Primary CTA button — CSS-driven blue→green hover, no inline JS */
+  .btn-primary {
+    --btn-bg: var(--brand-blue);
+    --btn-shadow: oklch(0.56 0.22 265 / 0.5);
+    --btn-color: white;
+    background: var(--btn-bg);
+    box-shadow: 0 0 32px var(--btn-shadow);
+    color: var(--btn-color);
+    transition:
+      background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.25s ease;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    --btn-bg: var(--brand-green);
+    --btn-shadow: oklch(0.72 0.22 145 / 0.6);
+    --btn-color: oklch(0.12 0.02 145);
+    background: var(--brand-green);
+    box-shadow: 0 0 32px oklch(0.72 0.22 145 / 0.6);
+    color: oklch(0.12 0.02 145);
+  }
+
+  /* Contact form fields — CSS focus ring, no inline JS */
+  .contact-field:focus {
+    border-color: oklch(0.56 0.22 265 / 0.6) !important;
+    box-shadow: 0 0 0 3px oklch(0.56 0.22 265 / 0.15);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, oklch(0.6 0.22 265), oklch(0.75 0.18 220));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(135deg, oklch(0.72 0.22 145), oklch(0.80 0.18 160));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.15s; }
+  .fade-in-delay-2 { transition-delay: 0.3s; }
+  .fade-in-delay-3 { transition-delay: 0.45s; }
+
+  .hero-fade-in {
+    animation: heroFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-fade-in-delay {
+    animation: heroFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  .hero-fade-in-delay-2 {
+    animation: heroFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  }
+
+  @keyframes heroFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 24px oklch(0.56 0.22 265 / 0.4);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 24px oklch(0.72 0.22 145 / 0.5);
+  }
+}
